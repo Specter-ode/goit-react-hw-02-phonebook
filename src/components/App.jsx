@@ -13,34 +13,53 @@ class App extends Component {
     contacts: [
       {
         id: nanoid(),
-        username: 'Rosie Simpson',
-        number: '459-12-56',
+        username: 'Margaret Thatcher',
+        number: '063-459-12-56',
         gender: 'female',
       },
       {
         id: nanoid(),
-        username: 'Hermione Kline',
-        number: '443-89-12',
-        gender: 'female',
-      },
-      {
-        id: nanoid(),
-        username: 'Eden Clements',
-        number: '645-17-79',
+        username: 'Albert Einstein',
+        number: '067-443-89-12',
         gender: 'male',
       },
       {
         id: nanoid(),
-        username: 'Annie Copeland',
-        number: '227-91-26',
+        username: 'Isaac Newton',
+        number: '050-645-17-79',
+        gender: 'male',
+      },
+      {
+        id: nanoid(),
+        username: 'Maria Sklodowska-Curie',
+        number: '093-555-12-22',
         gender: 'female',
+      },
+      {
+        id: nanoid(),
+        username: 'William Shakespeare',
+        number: '063-227-91-26',
+        gender: 'male',
       },
     ],
     fieldFilter: '',
   };
-  addNewContact = dataAfterSubmit => {
-    const { username, number, gender } = dataAfterSubmit;
-    const contact = { id: nanoid(), username, number, gender };
+  addNewContact = newContactData => {
+    const { username } = newContactData;
+    const { contacts } = this.state;
+    if (
+      contacts.find(
+        contactFromBook =>
+          contactFromBook.username.toLowerCase() === username.toLowerCase()
+      )
+    ) {
+      alert(`${username} is already in contacts`);
+      return;
+    } else if (username === '') {
+      alert('Please enter your name');
+      return;
+    }
+    const contact = { ...newContactData, id: nanoid() };
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
@@ -63,22 +82,28 @@ class App extends Component {
   };
 
   render() {
-    const { fieldFilter } = this.state;
+    const { fieldFilter, contacts } = this.state;
     return (
       <div>
         <Container>
-          <Section title="Телефонная книга">
+          <Section title="Phonebook">
             <ContactForm catchSubmitInfo={this.addNewContact} />
           </Section>
-          <Section title="Контакты">
-            <Filter
-              valueFromFilter={fieldFilter}
-              catchFilterInfo={this.changeFilter}
-            />
-            <ContactList
-              contacts={this.getVisibleContacts()}
-              onDelete={this.deleteContact}
-            />
+          <Section title="Contacts">
+            {contacts.length > 0 ? (
+              <>
+                <Filter
+                  valueFromFilter={fieldFilter}
+                  catchFilterInfo={this.changeFilter}
+                />
+                <ContactList
+                  contacts={this.getVisibleContacts()}
+                  onDelete={this.deleteContact}
+                />
+              </>
+            ) : (
+              <p>No contacts in phonebook</p>
+            )}
           </Section>
         </Container>
       </div>

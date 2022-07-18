@@ -4,17 +4,13 @@ import s from './ContactList.module.css';
 const ContactList = ({ contacts, onDelete }) => {
   return (
     <ul className={s.list}>
-      {contacts.map(contact => (
-        <li className={s.item} key={contact.id}>
+      {contacts.map(({ id, username, number, gender }) => (
+        <li className={s.item} key={id}>
           <p className={s.info}>
-            {contact.username}: {contact.number}
+            {username}({gender}): {number}
           </p>
-          <button
-            className={s.btn}
-            type="button"
-            onClick={() => onDelete(contact.id)}
-          >
-            Удалить
+          <button className={s.btn} type="button" onClick={() => onDelete(id)}>
+            Delete
           </button>
         </li>
       ))}

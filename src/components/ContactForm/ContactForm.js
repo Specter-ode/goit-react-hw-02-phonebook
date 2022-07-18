@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import s from './ContactForm.module.css';
 
 class ContactForm extends Component {
@@ -45,9 +45,8 @@ class ContactForm extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             onChange={this.handleChange}
             className={s.input}
-            placeholder="Jacob Mercer"
           />
-          Имя
+          Name
         </label>
         <label className={s.label}>
           <input
@@ -60,57 +59,60 @@ class ContactForm extends Component {
             onChange={this.handleChange}
             className={s.input}
           />
-          Номер телефона
+          Phone number
         </label>
-        <p>Ваш пол:</p>
-        <label className={s.label}>
-          <input
-            type="radio"
-            name="gender"
-            value="unknown"
-            checked={this.state.gender === 'unknown'}
-            onChange={this.handleChange}
-            className={s.input}
-          />
-          Не указано
-        </label>
-        <label className={s.label}>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            checked={this.state.gender === 'male'}
-            onChange={this.handleChange}
-            className={s.input}
-          />
-          Мужской
-        </label>
-        <label className={s.label}>
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            checked={this.state.gender === 'female'}
-            onChange={this.handleChange}
-            className={s.input}
-          />
-          Женский
-        </label>
-        <label className={s.label}>
+        <div className={s.gender}>
+          <p className={s.gender__info}>Gender:</p>
+          <label className={s.gender__label}>
+            <input
+              type="radio"
+              name="gender"
+              value="unknown"
+              checked={this.state.gender === 'unknown'}
+              onChange={this.handleChange}
+              className={s.gender__input}
+            />
+            Don't specify
+          </label>
+          <label className={s.gender__label}>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              checked={this.state.gender === 'male'}
+              onChange={this.handleChange}
+              className={s.gender__input}
+            />
+            Male
+          </label>
+          <label className={s.gender__label}>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              checked={this.state.gender === 'female'}
+              onChange={this.handleChange}
+              className={s.gender__input}
+            />
+            Female
+          </label>
+        </div>
+        <label className={s.age__label}>
           <input
             type="checkbox"
             name="adult"
             checked={this.state.adult}
             onChange={this.handleAdultChange}
-            className={s.input}
+            className={s.age__input}
           />
-          Мне уже есть 18 лет
+          I am already 18 years old
         </label>
-        <button type="submit" disabled={!this.state.adult}>
-          Добавить контакт
+        <button type="submit" disabled={!this.state.adult} className={s.btn}>
+          Add contact
         </button>
       </form>
     );
   }
 }
+
 export default ContactForm;
