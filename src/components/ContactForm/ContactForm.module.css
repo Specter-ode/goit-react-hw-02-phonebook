@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 20px;
+  font-weight: 700;
+}
+.label:not(:last-child) {
+  margin-bottom: 15px;
+}
+.input {
+  margin-right: 20px;
+}
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
